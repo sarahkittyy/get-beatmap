@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "osu linux beatmap installer",
   "main": "src/index.js",
+  "repository": "https://github.com/sarahkittyy/get-beatmap",
   "bin": "src/index.js",
   "scripts": {
     "build": "pkg -t latest-linux-x64 -o ./get-beatmap .",
