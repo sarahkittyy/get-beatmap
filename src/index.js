@@ -11,7 +11,8 @@ const { osudir } = require('./config.json');
 const fs = require('fs');
 const path = require('path');
 const unzipper = require('unzipper');
-const rimraf = require('rimraf');
+const rmfr = require('rmfr');
+const glob = require('glob');
 
 auth().then(() => {
 
@@ -49,8 +50,8 @@ async function getMap(val) {
 
 	console.log(`Downloading ${id}...`);
 
-	if(await fs.exists(path.resolve(osudir, `Songs/${id}`))) {
-		await rimraf(path.resolve(osudir, `Songs/${id}`));
+	if(glob(path.resolve(osudir, `Songs/${id}*`)).length > 0) {
+		await rmfr(path.resolve(osudir, `Songs/${id}*`), {glob: true});
 	}
 	
 	await request.get({

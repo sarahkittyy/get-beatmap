@@ -15,11 +15,12 @@
   "author": "Sarah Ohlin",
   "license": "MIT",
   "dependencies": {
+    "glob": "^7.1.6",
     "jquery": "^3.4.1",
     "jsdom": "^15.2.1",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8",
-    "rimraf": "^3.0.0",
+    "rmfr": "^2.0.0",
     "unzipper": "^0.10.5"
   },
   "devDependencies": {
