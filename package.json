@@ -6,7 +6,7 @@
   "bin": "src/index.js",
   "scripts": {
     "build": "pkg -t latest-linux-x64 -o ./get-beatmap .",
-	"test": "node ."
+    "test": "node ."
   },
   "pkg": {
     "scripts": "src/**/*.js"
@@ -14,7 +14,11 @@
   "author": "Sarah Ohlin",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.88.0"
+    "jquery": "^3.4.1",
+    "jsdom": "^15.2.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.8",
+    "unzipper": "^0.10.5"
   },
   "devDependencies": {
     "pkg": "^4.4.2"
