@@ -20,16 +20,36 @@ function isId(val) {
 	return /^[0-9]{1,8}$/.test(val);
 }
 
-async function getMap(id) {
-	if(!isId(id)) {
-		console.error(`${id} is not a valid beatmap.`);
+function isUrl(val) {
+	return /^https?:\/\/osu.ppy.sh\/.*$/.test(val);
+}
+
+function grabId(val) {
+	return val.match(/^https?:\/\/osu.ppy.sh\/beatmapsets\/([0-9]{1,8}).*$/)[1];
+}
+
+async function getMap(val) {
+	let url;
+	let id;
+
+	if(isId(val)) {
+		url = `https://osu.ppy.sh/beatmapsets/${id}`
+		id = val;
+	}
+	else if(isUrl(val)) {
+		id = grabId(val);
+		url = `https://osu.ppy.sh/beatmapsets/${id}`
+	}
+	else {
+		console.error(`${val} is not a valid beatmap.`);
+		console.error(`Only urls and song ids are supported.`);
 		return;
 	}
 
 	console.log(`Downloading ${id}...`);
 
 	await request.get({
-		url: `https://osu.ppy.sh/beatmapsets/${id}/download`,
+		url: url + '/download',
 		rejectUnauthorized: true,
 		jar,
 		headers,
@@ -37,6 +57,8 @@ async function getMap(id) {
 	.pipe(unzipper.Extract({
 		path: path.resolve(osudir, `Songs/${id}`)
 	}));
+	
+	return;
 }
 
 for (let id of args) {
