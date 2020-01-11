@@ -55,16 +55,19 @@ async function getMap(val) {
 		headers,
 	})
 	.pipe(unzipper.Extract({
-		path: path.resolve(osudir, `Songs/${id}`)
-	}));
+		path: path.resolve(osudir, `Songs/${id}`),
+	}))
+	.promise();
 	
 	return;
 }
 
-for (let id of args) {
-	getMap(id).then(() => {
-		console.log(`Finished downloading ${id}...`);
-	});
-}
+(async function() {
+	for (let id of args) {
+		await getMap(id).then(() => {
+			console.log(`Finished downloading ${id}...`);
+		});
+	}
+})();
 
 });
